@@ -18,7 +18,7 @@ def approx(f, a=0, b=1, n_node=51, p=10):
     nodes = np.linspace(a, b, n_node)
     values = f(nodes)
 
-    sum = 0
+    sum_n = 0
 
     for i in range(n):
         sum_n += values[2*i] + 4*values[2*i+1] + values[2*i+2]
@@ -26,7 +26,7 @@ def approx(f, a=0, b=1, n_node=51, p=10):
     result, _ = integrate.quad(f, a, b)
     print(f"{'Python calculated:':<20}{result:.{p}f}")
     print(f"{'We calculated:':<20}{sum_n:.{p}f}")
-    print(f"{'Difference is':<20}{abs(result-sum):.{p}f}")
+    print(f"{'Difference is':<20}{abs(result-sum_n):.{p}f}")
 
 
 approx(np.sin, 0, 1, 9)
@@ -37,10 +37,10 @@ approx(np.sin, 0, 1, 9)
 
 
 # def approx(
-#     f: Callable[[np.ndarray], np.ndarray], 
-#     a: float = 0, 
-#     b: float = 1, 
-#     n_node: int = 51, 
+#     f: Callable[[np.ndarray], np.ndarray],
+#     a: float = 0,
+#     b: float = 1,
+#     n_node: int = 51,
 #     precision: int = 10
 # ) -> Tuple[float, float, float]:
 #     """
@@ -74,7 +74,8 @@ approx(np.sin, 0, 1, 9)
 #     h = (b - a) / (n_node - 1)
 #
 #     # Simpson's rule (vectorized)
-#     simpson_integral = h / 3 * (values[0] + 4 * np.sum(values[1:-1:2]) + 2 * np.sum(values[2:-2:2]) + values[-1])
+#     simpson_integral = h / 3 * (values[0] + 4 * np.sum(values[1:-1:2]) + 2 *
+#     np.sum(values[2:-2:2]) + values[-1])
 #
 #     # Exact result using scipy
 #     exact_integral, _ = integrate.quad(f, a, b)
@@ -84,30 +85,28 @@ approx(np.sin, 0, 1, 9)
 #
 #
 # def print_results(
-#     simpson_integral: float, 
-#     exact_integral: float, 
-#     difference: float, 
+#     simpson_integral: float,
+#     exact_integral: float,
+#     difference: float,
 #     precision: int
 # ) -> None:
 #     """
 #     Prints the results of the integration.
-
+#
 #     Args:
 #         simpson_integral (float): The integral computed using Simpson's rule.
 #         exact_integral (float): The integral computed using scipy's quad.
 #         difference (float): The absolute difference between the two results.
 #         precision (int): The precision for displaying results.
-
+#
 #     Returns:
 #         None
 #     """
 #     print(f"{'Python calculated:':<20}{exact_integral:.{precision}f}")
 #     print(f"{'We calculated:':<20}{simpson_integral:.{precision}f}")
 #     print(f"{'Difference is:':<20}{difference:.{precision}f}")
-
-
+#
 # # Example usage
 # if __name__ == "__main__":
 #     simpson_result, exact_result, diff = approx(np.sin, 0, np.pi, n_node=9, precision=10)
 #     print_results(simpson_result, exact_result, diff, precision=10)
-
