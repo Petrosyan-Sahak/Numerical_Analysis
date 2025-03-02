@@ -21,11 +21,11 @@ def approx(f, a=0, b=1, n_node=51, p=10):
     sum = 0
 
     for i in range(n):
-        sum += values[2*i] + 4*values[2*i+1] + values[2*i+2]
-    sum *= h/6
-    result, error = integrate.quad(f, a, b)
+        sum_n += values[2*i] + 4*values[2*i+1] + values[2*i+2]
+    sum_n *= h/6
+    result, _ = integrate.quad(f, a, b)
     print(f"{'Python calculated:':<20}{result:.{p}f}")
-    print(f"{'We calculated:':<20}{sum:.{p}f}")
+    print(f"{'We calculated:':<20}{sum_n:.{p}f}")
     print(f"{'Difference is':<20}{abs(result-sum):.{p}f}")
 
 
@@ -45,14 +45,14 @@ approx(np.sin, 0, 1, 9)
 # ) -> Tuple[float, float, float]:
 #     """
 #     Approximates a function's integral using Simpson's rule.
-
+#
 #     Args:
 #         f (Callable[[np.ndarray], np.ndarray]): The function to integrate.
 #         a (float): The lower limit of integration.
 #         b (float): The upper limit of integration.
 #         n_node (int): The number of nodes (must be odd).
 #         precision (int): The precision for displaying results.
-
+#
 #     Returns:
 #         Tuple[float, float, float]: A tuple containing:
 #             - simpson_integral: The integral computed using Simpson's rule.
@@ -67,22 +67,22 @@ approx(np.sin, 0, 1, 9)
 #         raise ValueError("Number of nodes must be greater than 1.")
 #     if not n_node & 1:
 #         raise ValueError("Number of nodes must be odd.")
-
+#
 #     # Nodes and function values
 #     nodes = np.linspace(a, b, n_node)
 #     values = f(nodes)
 #     h = (b - a) / (n_node - 1)
-
+#
 #     # Simpson's rule (vectorized)
 #     simpson_integral = h / 3 * (values[0] + 4 * np.sum(values[1:-1:2]) + 2 * np.sum(values[2:-2:2]) + values[-1])
-
+#
 #     # Exact result using scipy
 #     exact_integral, _ = integrate.quad(f, a, b)
-
+#
 #     # Return results
 #     return simpson_integral, exact_integral, abs(exact_integral - simpson_integral)
-
-
+#
+#
 # def print_results(
 #     simpson_integral: float, 
 #     exact_integral: float, 
