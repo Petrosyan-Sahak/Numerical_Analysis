@@ -1,3 +1,38 @@
+"""
+Simpson's Rule Approximation Module
+
+This module provides a function to approximate the definite integral 
+of a given function using Simpson's rule. It compares the computed 
+approximation to the result obtained using SciPy's integration 
+method.
+
+Functions:
+----------
+- approx(f, a=0, b=1, n_node=51, p=10):
+    Approximates the integral of the function `f` over the interval 
+    [a, b] using Simpson's rule. The number of nodes `n_node` must 
+    be an odd number.
+
+Dependencies:
+-------------
+- numpy
+- scipy.integrate
+
+Usage Example:
+--------------
+>>> import numpy as np
+>>> from scipy import integrate
+>>> from simpson_module import approx  # Assuming you save this as simpson_module.py
+>>> f = lambda x: np.sin(x)
+>>> approx(f, 0, np.pi, 51)
+
+Output:
+-------
+Python calculated:   2.0000000000
+We calculated:       2.0000000000
+Difference is        0.0000000000
+"""
+
 import numpy as np
 from scipy import integrate
 
